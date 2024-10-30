@@ -83,6 +83,7 @@ type
 
 var
   frmPrincipal: TfrmPrincipal;
+  chamada : string;
 
 implementation
 
@@ -217,9 +218,12 @@ end;
 
 procedure TfrmPrincipal.edtPrecoExit(Sender: TObject);
 begin
-  if edtPreco.Text = '' then
-    edtPreco.Text := dmConexoes.qrProdutos.FieldByName('PrecoVenda').AsString;
-  edtTotal.Text := FloatToStr(StrToFloat(edtQtd.Text)*StrToFloat(edtPreco.Text));
+  if edtCodigo.Enabled then
+    begin
+      if edtPreco.Text = '' then
+        edtPreco.Text := dmConexoes.qrProdutos.FieldByName('PrecoVenda').AsString;
+      edtTotal.Text := FloatToStr(StrToFloat(edtQtd.Text)*StrToFloat(edtPreco.Text));
+    end;
 end;
 
 procedure TfrmPrincipal.edtPrecoKeyPress(Sender: TObject; var Key: Char);
@@ -241,9 +245,12 @@ end;
 
 procedure TfrmPrincipal.edtQtdExit(Sender: TObject);
 begin
-  if edtQtd.Text = '' then
-    edtQtd.Text := '1';
-  edtTotal.Text := FloatToStr(StrToFloat(edtQtd.Text)*StrToFloat(edtPreco.Text));
+  if edtCodigo.Enabled then
+    begin
+      if edtQtd.Text = '' then
+        edtQtd.Text := '1';
+      edtTotal.Text := FloatToStr(StrToFloat(edtQtd.Text)*StrToFloat(edtPreco.Text));
+    end;
 end;
 
 procedure TfrmPrincipal.edtQtdKeyPress(Sender: TObject; var Key: Char);
@@ -321,6 +328,7 @@ end;
 
 procedure TfrmPrincipal.HabilitaCampos(exibir: boolean);
 begin
+  edtCodCliente.Enabled       := not exibir;
   edtCodigo.Enabled           := exibir;
   edtQtd.Enabled              := exibir;
   edtPreco.Enabled            := exibir;
@@ -388,7 +396,9 @@ begin
 
           edtCodCliente.Text := qrPedidosDadosGerais.FieldByName('CodCliente').AsString;
           Key := #13;
+          chamada := 'LocalizarVenda';
           edtCodClienteKeyPress(Self,Key);
+          chamada := '';
           edtCodigo.SetFocus;
         end
       else
@@ -406,8 +416,8 @@ var
 begin
   NumPedido := StrToInt(lbNumeroPedido.Caption);
   ExcluirVenda(NumPedido);
-  LimpaVenda;
   HabilitaCampos(false);
+  LimpaVenda;
 end;
 
 procedure TfrmPrincipal.btnCancelarPedidoClick(Sender: TObject);
@@ -448,7 +458,11 @@ begin
           ShowMessage('Por favor, digite apenas números.');
       end
     else
-      Break;
+      begin
+        HabilitaCampos(false);
+        Break;
+      end;
+
   until False;
 end;
 
@@ -460,9 +474,8 @@ begin
       qrPedidosDadosGerais.FieldByName('VALORTOTAL').AsFloat := qrSomaProdutos.FieldByName('VALORTOTAL').AsFloat;
       qrPedidosDadosGerais.Post;
       application.MessageBox('Venda Finalizada!','Aviso - [Ponto de Venda]', MB_OK+MB_ICONINFORMATION);
-
-      LimpaVenda;
       HabilitaCampos(false);
+      LimpaVenda;
     end;
 end;
 
@@ -541,7 +554,18 @@ begin
   if Key = VK_DELETE then
     begin
       case Application.MessageBox('Deseja Excluir o Item da Venda?','Aviso - [Ponto de Venda]', MB_YESNO+MB_ICONQUESTION) of
-        idyes: dmConexoes.qrPedidosProdutos.Delete;
+        idyes: begin
+          with dmConexoes do
+            begin
+              qrPedidosProdutos.Delete;
+              qrSomaProdutos.Close;
+              qrSomaProdutos.SQL.Clear;
+              qrSomaProdutos.SQL.Add('SELECT SUM(VLRTOTAL) AS VALORTOTAL FROM PDV.PEDIDOSPRODUTOS WHERE (NUMEROPEDIDO = '+lbNumeroPedido.Caption+')');
+              qrSomaProdutos.Open;
+
+              lbTotalVenda.Caption := FormatFloat('R$ ##0.00',qrSomaProdutos.FieldByName('VALORTOTAL').AsFloat);
+            end;
+        end;
       end;
       edtCodigo.SetFocus;
       DBGrid2.Refresh;
@@ -580,7 +604,7 @@ begin
               exit;
             end;
 
-          if not qrPedidosDadosGerais.Active then
+          if chamada <> 'LocalizarVenda' then
             begin
               qrPedidosDadosGerais.Close;
               qrPedidosDadosGerais.SQL.Clear;
@@ -590,8 +614,16 @@ begin
               qrPedidosDadosGerais.Insert;
               qrPedidosDadosGerais.FieldByName('CodCliente').AsInteger   := StrToInt(EdtCodCliente.Text);
               qrPedidosDadosGerais.Post;
-            end;
+            end
+          else
+            begin
+              qrSomaProdutos.Close;
+              qrSomaProdutos.SQL.Clear;
+              qrSomaProdutos.SQL.Add('SELECT SUM(VLRTOTAL) AS VALORTOTAL FROM PDV.PEDIDOSPRODUTOS WHERE (NUMEROPEDIDO = '+lbNumeroPedido.Caption+')');
+              qrSomaProdutos.Open;
 
+              lbTotalVenda.Caption := FormatFloat('R$ ##0.00',qrSomaProdutos.FieldByName('VALORTOTAL').AsFloat);
+            end;
 
           qrProdutos.Close;
           qrProdutos.SQL.Clear;
