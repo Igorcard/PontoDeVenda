@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/10/28 15:50:14.000.895,=C:\Users\ACCESYS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/10/28 15:51:23.000.553,=C:\Users\ACCESYS\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/10/28 17:49:58.000.116,C:\Users\ACCESYS\Desktop\PDV\untPrincipal.pas=C:\Users\ACCESYS\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/10/28 17:49:58.000.116,C:\Users\ACCESYS\Desktop\PDV\untPrincipal.dfm=C:\Users\ACCESYS\Documents\Embarcadero\Studio\Projects\Unit2.dfm</Transaction>
+    <Transaction>2024/10/28 17:50:06.000.719,C:\Users\ACCESYS\Desktop\PDV\untConexoes.dfm=C:\Users\ACCESYS\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/10/28 17:50:06.000.719,C:\Users\ACCESYS\Desktop\PDV\untConexoes.pas=C:\Users\ACCESYS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/10/28 17:50:12.000.589,C:\Users\ACCESYS\Desktop\PDV\PontoDeVenda.dproj=C:\Users\ACCESYS\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2024/10/28 20:43:46.000.507,C:\Users\ACCESYS\Desktop\PDV\untPrincipal.pas=C:\Users\ACCESYS\Desktop\PDV\untPrpas.pas</Transaction>
+    <Transaction>2024/10/28 20:43:46.000.507,C:\Users\ACCESYS\Desktop\PDV\untPrincipal.dfm=C:\Users\ACCESYS\Desktop\PDV\untPrpas.dfm</Transaction>
+    <Transaction>2024/10/28 20:43:54.000.045,C:\Users\ACCESYS\Desktop\PDV\untConexoes.pas=C:\Users\ACCESYS\Desktop\PDV\untCoxoes.pas</Transaction>
+    <Transaction>2024/10/28 20:43:54.000.045,C:\Users\ACCESYS\Desktop\PDV\untConexoes.dfm=C:\Users\ACCESYS\Desktop\PDV\untCoxoes.dfm</Transaction>
+    <Transaction>2024/10/28 20:44:03.000.753,C:\Users\ACCESYS\Desktop\PDV\untPrpas.dfm=C:\Users\ACCESYS\Desktop\PDV\untConexoes.dfm</Transaction>
+    <Transaction>2024/10/28 20:44:03.000.753,C:\Users\ACCESYS\Desktop\PDV\untPrpas.pas=C:\Users\ACCESYS\Desktop\PDV\untConexoes.pas</Transaction>
+    <Transaction>2024/10/28 20:44:12.000.369,C:\Users\ACCESYS\Desktop\PDV\untCoxoes.dfm=C:\Users\ACCESYS\Desktop\PDV\untPrincipalç.dfm</Transaction>
+    <Transaction>2024/10/28 20:44:12.000.369,C:\Users\ACCESYS\Desktop\PDV\untCoxoes.pas=C:\Users\ACCESYS\Desktop\PDV\untPrincipalç.pas</Transaction>
+    <Transaction>2024/10/28 20:44:14.000.779,C:\Users\ACCESYS\Desktop\PDV\untPrincipalç.dfm=C:\Users\ACCESYS\Desktop\PDV\untPrincipal.dfm</Transaction>
+    <Transaction>2024/10/28 20:44:14.000.779,C:\Users\ACCESYS\Desktop\PDV\untPrincipalç.pas=C:\Users\ACCESYS\Desktop\PDV\untPrincipal.pas</Transaction>
+    <Transaction>2024/10/29 08:23:57.000.250,=C:\Users\ACCESYS\Desktop\PDV\Unit1.pas</Transaction>
+    <Transaction>2024/10/29 08:36:05.000.086,C:\Users\ACCESYS\Desktop\PDV\untConectarBanco.dfm=C:\Users\ACCESYS\Desktop\PDV\Unit1.dfm</Transaction>
+    <Transaction>2024/10/29 08:36:05.000.086,C:\Users\ACCESYS\Desktop\PDV\untConectarBanco.pas=C:\Users\ACCESYS\Desktop\PDV\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

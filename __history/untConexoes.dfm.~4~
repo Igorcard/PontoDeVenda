@@ -1,0 +1,79 @@
+object dmConexoes: TdmConexoes
+  OldCreateOrder = False
+  Height = 459
+  Width = 677
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'DriverID=MySQL'
+      'User_Name=root')
+    Left = 128
+    Top = 96
+  end
+  object qrClientes: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from pdv.clientes')
+    Left = 128
+    Top = 160
+  end
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
+    VendorLib = 'C:\Users\ACCESYS\Desktop\PDV\libmysql.dll'
+    Left = 128
+    Top = 48
+  end
+  object qrProdutos: TFDQuery
+    Connection = FDConnection1
+    FormatOptions.AssignedValues = [fvFmtDisplayNumeric]
+    SQL.Strings = (
+      'select * from pdv.produtos')
+    Left = 128
+    Top = 216
+    object qrProdutosCodigo: TFDAutoIncField
+      FieldName = 'Codigo'
+      Origin = 'Codigo'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object qrProdutosDescricao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Descricao'
+      Origin = 'Descricao'
+      Size = 200
+    end
+    object qrProdutosPrecoVenda: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'PrecoVenda'
+      Origin = 'PrecoVenda'
+      DisplayFormat = 'R$#0.00'
+      Precision = 18
+      Size = 2
+    end
+  end
+  object qrAlteraProdutos: TFDQuery
+    Connection = FDConnection1
+    FormatOptions.AssignedValues = [fvFmtDisplayNumeric]
+    SQL.Strings = (
+      'select * from pdv.produtos')
+    Left = 208
+    Top = 216
+    object FDAutoIncField1: TFDAutoIncField
+      FieldName = 'Codigo'
+      Origin = 'Codigo'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object StringField1: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Descricao'
+      Origin = 'Descricao'
+      Size = 200
+    end
+    object BCDField1: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'PrecoVenda'
+      Origin = 'PrecoVenda'
+      DisplayFormat = 'R$#0.00'
+      Precision = 18
+      Size = 2
+    end
+  end
+end

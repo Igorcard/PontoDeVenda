@@ -1,0 +1,83 @@
+unit untConectarBanco;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
+  Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TfrmConectarBanco = class(TForm)
+    Shape1: TShape;
+    Image1: TImage;
+    edtUsuario: TLabeledEdit;
+    edtSenha: TLabeledEdit;
+    edtPorta: TLabeledEdit;
+    Shape2: TShape;
+    btnConectar: TSpeedButton;
+    procedure btnConectarClick(Sender: TObject);
+    procedure edtUsuarioKeyPress(Sender: TObject; var Key: Char);
+    procedure edtSenhaKeyPress(Sender: TObject; var Key: Char);
+    procedure edtPortaKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConectarBanco: TfrmConectarBanco;
+
+implementation
+
+{$R *.dfm}
+
+uses untConexoes, untPrincipal;
+
+procedure TfrmConectarBanco.btnConectarClick(Sender: TObject);
+begin
+  with dmConexoes do
+    begin
+      FDConnection1.Connected := false;
+      FDConnection1.Params.Clear;
+      try
+        FDConnection1.Params.Add('User_Name='+edtusuario.text);
+        FDConnection1.Params.Add('Database=pdv');
+        FDConnection1.Params.Add('Password='+edtsenha.text);
+        FDConnection1.Params.Add('DriverID=MySQL');
+        FDConnection1.Connected := true;
+        ShowMessage('Conectado Com Sucesso!');
+        Close;
+      except on E:Exception do
+        begin
+          Application.MessageBox(pchar('Erro ao Conectar no Banco de Dados: '+#13+e.message),'Aviso - [Conectar Banco]',MB_OK+MB_ICONWARNING);
+        end;
+      end;
+
+    end;
+end;
+
+procedure TfrmConectarBanco.edtPortaKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #13 then
+    btnConectarClick(Self);
+  if key = #27 then
+    edtSenha.SetFocus;
+end;
+
+procedure TfrmConectarBanco.edtSenhaKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #13 then
+    edtPorta.SetFocus;
+  if key = #27 then
+    edtUsuario.SetFocus;
+end;
+
+procedure TfrmConectarBanco.edtUsuarioKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key = #13 then
+    edtSenha.SetFocus;
+end;
+
+end.

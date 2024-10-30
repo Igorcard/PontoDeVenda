@@ -1,0 +1,24 @@
+object dmConexoes: TdmConexoes
+  OldCreateOrder = False
+  Height = 459
+  Width = 677
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'User_Name=root'
+      'Database=pdv'
+      'Password=123456'
+      'DriverID=MySQL')
+    Left = 128
+    Top = 96
+  end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    Left = 128
+    Top = 144
+  end
+  object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink
+    VendorLib = 'C:\Users\ACCESYS\Desktop\PDV\libmysql.dll'
+    Left = 248
+    Top = 144
+  end
+end

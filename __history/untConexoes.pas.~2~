@@ -1,0 +1,40 @@
+unit untConexoes;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL,
+  FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
+  FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, FireDAC.Phys.MSSQLDef, FireDAC.Phys.ODBCBase,
+  FireDAC.Phys.MSSQL, VCL.Forms;
+
+type
+  TdmConexoes = class(TDataModule)
+    FDConnection1: TFDConnection;
+    FDQuery1: TFDQuery;
+    FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink;
+    procedure FDConnection1BeforeConnect(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmConexoes: TdmConexoes;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TdmConexoes.FDConnection1BeforeConnect(Sender: TObject);
+begin
+  FDPhysMSSQLDriverLink1.VendorLib := ExtractFilePath(Application.ExeName) +'libmysql.dll';
+end;
+
+end.

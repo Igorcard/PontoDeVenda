@@ -1,0 +1,16 @@
+program PontoDeVenda;
+
+uses
+  Vcl.Forms,
+  untConexoes in 'untConexoes.pas' {frmPrincipal},
+  untPrincipal in 'untPrincipal.pas' {dmConexoes: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TdmConexoes, dmConexoes);
+  Application.Run;
+end.
